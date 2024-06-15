@@ -1,13 +1,13 @@
 interface BotaoProps {
-    conteudo: string;
+    content: string;
     onClick: () => void;
     className?: string;
 }
 
-const Botao = ({ conteudo, onClick, className }: BotaoProps) => {
+const Botao = ({ content, onClick, className }: BotaoProps) => {
     return (
         <button className={className} onClick={onClick}>
-            {conteudo}            
+            {content}            
         </button>
     );
 };
