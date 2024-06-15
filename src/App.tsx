@@ -1,12 +1,12 @@
+import Botao from './components/botao'
+
 import './index.css'
 
 function App() {
   return (
-    <>
-      <p className="read-the-docs bg-red-500">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='p-6'>
+      <Botao className={"bg-orange-400 min-w-40 max-w-80"} conteudo={"Botão"} onClick={() => {console.log("testando")}}/>
+    </div>
   )
 }
 
