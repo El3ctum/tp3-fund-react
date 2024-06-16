@@ -2,11 +2,12 @@ import { useState, ChangeEvent } from "react";
 import Botao from "../botao";
 
 interface TexfieldProps {
-  type: "text" | "email" | "password" | "textarea";
+  type: "text" | "email" | "password" | "textarea" | "date" | "file";
   placeholder: string;
-  value: string;
+  value: string | File | null;  // Faz parte da tentativa de evitar tela branca toda vez que eu carregava um arquivo.
   onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   className?: string;
+  name: string;
 }
 
 const Texfield = ({
@@ -14,7 +15,8 @@ const Texfield = ({
   placeholder,
   value,
   onChange,
-  className
+  className,
+  name
 }: TexfieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -30,21 +32,24 @@ const Texfield = ({
         <input
           type={inputType}
           placeholder={placeholder}
-          value={value}
+          value={type !== 'file' ? value as string : undefined} // Faz parte da tentativa de evitar tela branca toda vez que eu carregava um arquivo.
           onChange={onChange}
           className={`border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
+          name={name}
         />
       ) : (
         <textarea
           placeholder={placeholder}
-          value={value}
+          value={value as string} 
           onChange={onChange}
           rows={4}
           className={`border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
+          name={name}
         />
       )}
       {type === 'password' && (
         <Botao
+          type="button"
           content={showPassword ? '🙈' : '👁️'}
           onClick={togglePasswordVisibility}
           className="absolute right-3 top-1/2 transform -translate-y-1/2 focus:outline-none"
